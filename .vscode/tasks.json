@@ -6,8 +6,8 @@
         "label": "loglr", // 任务名称，与launch.json的preLaunchTask相对应
         "command": "g++",   // 要使用的编译器，C++用g++
         "args": [
-            "${workspaceFolder}/main.cpp",
-            "${workspaceFolder}/src/***.cpp",
+            //"${workspaceFolder}/main.cpp",
+            "${workspaceFolder}/*.cpp",
             "-o",    // 指定输出文件名，不加该参数则默认输出a.exe，Linux下默认a.out
             "${workspaceFolder}/main.exe",
             "-g",    // 生成和调试有关的信息

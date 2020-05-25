@@ -133,15 +133,32 @@ public:
 };
 
 
-LogEvent::LogEvent(const char* file, int32_t line, uint32_t elapse,
+LogEvent::LogEvent(std::shared_ptr<Logger> logger, LogLevel::Level level, 
+        const char* file, int32_t line, uint32_t elapse,
         uint32_t threadId, uint32_t fiberId, uint64_t time)
         :m_file(file)
         ,m_line(line)
         ,m_elapse(elapse)
         ,m_threadId(threadId)
         ,m_fiberId(fiberId)
-        ,m_time(time){
+        ,m_time(time)
+        ,m_logger(logger)
+        ,m_level(level){
     
+}
+
+LogEvent::~LogEvent(){}
+
+
+LogEventWrap::LogEventWrap(LogEvent::ptr e)
+    :m_event(e){
+
+}
+LogEventWrap::~LogEventWrap(){
+    m_event->getLogger()->log(m_event->getLevel(), m_event); //一脸懵逼
+}
+std::stringstream& LogEventWrap::getSS(){
+    return m_event->getSS();
 }
 
 //Logger
@@ -208,7 +225,7 @@ void FileLogAppender::log(Logger::ptr logger,LogLevel::Level level, LogEvent::pt
 
 FileLogAppender::FileLogAppender(const std::string& filename)
     :m_filename(filename){
-    
+    reopen();
 }
 
 bool FileLogAppender::reopen(){
@@ -365,5 +382,18 @@ void LogFormatter::init(){
         std::cout << "(" << std::get<0>(i) << ") - (" << std::get<1>(i) << ") - (" << std::get<2>(i) << ")" << std::endl;
     }
 }
+
+
+LoggerManager::LoggerManager(){
+    m_root.reset(new Logger);
+
+    m_root->addAppender(StdoutLogAppender::ptr(new StdoutLogAppender));
+}
+
+Logger::ptr LoggerManager::getLogger(const std::string& name){
+    auto it = m_loggers.find(name);
+    return it == m_loggers.end() ? m_root : it->second;
+}
+
 
 }

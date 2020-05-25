@@ -6,7 +6,8 @@
 
 namespace lirui{
 
-    pid_t GetThreadId();
+pid_t GetThreadId(); //获取线程ID
+uint32_t GetFiberId(); //获取协程ID
 
 }
 
