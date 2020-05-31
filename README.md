@@ -32,3 +32,19 @@ cmake .. # CMakeLists.txt文件所在目录 cd build 让MakeFile等文件生成�
 make
 ```
 
+终端操作如下，我已经build过了：
+
+```powershell
+PS E:\project\loglr\build> cmake ..
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/project/loglr/build
+PS E:\project\loglr\build> make
+Scanning dependencies of target loglr
+[ 25%] Building CXX object CMakeFiles/loglr.dir/log.cpp.obj
+[ 50%] Building CXX object CMakeFiles/loglr.dir/main.cpp.obj
+[ 75%] Linking CXX executable loglr.exe
+[100%] Built target loglr
+PS E:\project\loglr\build>
+```
+
