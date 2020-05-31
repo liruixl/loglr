@@ -1,2 +1,2 @@
-2020-05-25 17:42:00	test my macro error!
-2020-05-25 17:42:00	test my macro fatal!!!
+2020-05-31 20:17:33	test my macro error!
+2020-05-31 20:17:33	test my macro fatal!!!
